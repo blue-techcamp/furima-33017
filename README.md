@@ -39,18 +39,20 @@
 
 ## address table
 
-| Column                      | Type       | Options     |
-|-----------------------------|------------|-------------|
-| postal_code                 | string     | null: false |
-| prefecture_id               | integer    | null: false |
-| city                        | string     | null: false |
-| house_num                   | string     | null: false |
-| building_name               | string     | null: false |
-| phone_num                   | string     | null: false |
+| Column          | Type       | Options           |
+|-----------------|------------|-------------------|
+| purchase_record | references | foreign_key: true |
+| postal_code     | string     | null: false       |
+| prefecture_id   | integer    | null: false       |
+| city            | string     | null: false       |
+| house_num       | string     | null: false       |
+| building_name   | string     | null: false       |
+| phone_num       | string     | null: false       |
 
 ### Association
 
 - belongs_to :purchase_record
+
 ## purchase_record table
 
 | Column | Type       | Options           |
