@@ -45,8 +45,8 @@
 | prefecture_id               | integer    | null: false |
 | city                        | string     | null: false |
 | house_num                   | string     | null: false |
+| building_name               | string     | null: false |
 | phone_num                   | string     | null: false |
-| phone_num_input_only_num    | integer    | null: false |
 
 ### Association
 
@@ -61,5 +61,5 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
 * has_one :address
