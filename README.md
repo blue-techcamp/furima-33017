@@ -2,27 +2,27 @@
 
 ## users table
 
-| Column             | Type                | Options                 |
-|--------------------|---------------------|-------------------------|
-| nickname           | string              | null: false             |
-| email              | string              | unique: true            |
-| encrypted_password | string              | null: false             |
-| birth_date         | date                | null: false             |
-| last_name          | string              | null: false             |
-| first_name         | string              | null: false             |
-| last_name_kana     | string              | null: false             |
-| first_name_kana    | string              | null: false             |
+| Column             | Type                | Options                  |
+|--------------------|---------------------|--------------------------|
+| nickname           | string              | null: false              |
+| email              | string              | null: false unique: true |
+| encrypted_password | string              | null: false              |
+| birth_date         | date                | null: false              |
+| last_name          | string              | null: false              |
+| first_name         | string              | null: false              |
+| last_name_kana     | string              | null: false              |
+| first_name_kana    | string              | null: false              |
 
 ### Association
 
 * has_many :items
-* has_many :purchase_record
+* has_many :purchase_records
 
 ## items table
 
 | Column                 | Type       | Options           |
 |------------------------|------------|-------------------|
-| seller                 | string     | null: false       |
+| user                   | references | foreign_key: true |
 | name                   | string     | null: false       |
 | info                   | text       | null: false       |
 | price                  | integer    | null: false       |
@@ -39,27 +39,24 @@
 
 ## address table
 
-| Column                      | Type       | Options           |
-|-----------------------------|------------|-------------------|
-| token                       | integer    | null: false       |
-| postal_code                 | integer    | null: false       |
-| postal_code_input_correctly | integer    | null: false       |
-| prefecture                  | string     | null: false       |
-| city                        | string     | null: false       |
-| address                     | string     | null: false       |
-| phone_num                   | integer    | null: false       |
-| phone_num_input_only_num    | integer    | null: false       |
+| Column                      | Type       | Options     |
+|-----------------------------|------------|-------------|
+| postal_code                 | string     | null: false |
+| prefecture_id               | integer    | null: false |
+| city                        | string     | null: false |
+| house_num                   | string     | null: false |
+| phone_num                   | string     | null: false |
+| phone_num_input_only_num    | integer    | null: false |
 
 ### Association
 
-* has_many :purchase_record
-
+- belongs_to :purchase_record
 ## purchase_record table
 
-| Column             | Type                | Options                 |
-|--------------------|---------------------|-------------------------|
-| buyer              | string              | null: false             |
-| item               | string              | null: false             |
+| Column | Type       | Options           |
+|--------|------------|-------------------|
+| user   | references | foreign_key: true |
+| item   | references | foreign_key: true |
 
 ### Association
 
