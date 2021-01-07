@@ -1,24 +1,73 @@
-# README
+# DB 設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
 
-Things you may want to cover:
+| Column             | Type                | Options                 |
+|--------------------|---------------------|-------------------------|
+| nickname           | string              | null: false             |
+| email              | string              | null: false             |
+| password           | string              | null: false             |
+| birth_date         | string              | null: false             |
+| last_name          | string              | null: false             |
+| first_name         | string              | null: false             |
+| last_name_kana     | string              | null: false             |
+| first_name_kana    | string              | null: false             |
 
-* Ruby version
+### Association
 
-* System dependencies
+* has_many :items
+* has_one :address
+* has_many :purchase_record
 
-* Configuration
+## items table
 
-* Database creation
+| Column                              | Type       | Options           |
+|-------------------------------------|------------|-------------------|
+| seller                              | string     | null: false       |
+| image                               | text       | null: false       |
+| name                                | string     | null: false       |
+| info                                | text       | null: false       |
+| price                               | integer    | null: false       |
+| info                                | text       | null: false       |
+| price_half_width_num                | integer    | null: false       |
+| price_out_of_set_range              | integer    | null: false       |
+| category                            | string     | null: false       |
+| sales_status                        | string     | null: false       |
+| shipping_fee_status                 | string     | null: false       |
+| prefecture                          | string     | null: false       |
+| scheduled_delivery                  | integer    | null: false       |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+* has_one :address
+* has_many :purchase_record
 
-* Services (job queues, cache servers, search engines, etc.)
+## address table
 
-* Deployment instructions
+| Column                | Type       | Options           |
+|-----------------------|------------|-------------------|
+| postal_code           | integer    | null: false       |
+| prefectures           | string     | null: false       |
+| municipalities        | string     | null: false       |
+| house_num             | integer    | null: false       |
+| tel                   | integer    | null: false       |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :items
+* has_many :purchase_record
+
+## purchase_record table
+
+| Column             | Type                | Options                 |
+|--------------------|---------------------|-------------------------|
+| buyer              | string              | null: false             |
+| item               | string              | null: false             |
+
+### Association
+
+- belongs_to :user
+- belongs_to :items
+- belongs_to :address
