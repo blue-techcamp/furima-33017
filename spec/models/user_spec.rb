@@ -19,27 +19,32 @@ require 'rails_helper'
      it "last_nameが空では登録できない" do
       user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", last_name: "", first_name: "太郎", last_name_kana: "アベ", first_name_kana: "タロウ", birth_date: "19990101")
       user.valid?
-      expect(user.errors.full_messages).to include("Last Name can't be blank")
+      expect(user.errors.full_messages).to include("Last name can't be blank")
      end
      it "first_nameが空では登録できない" do
       user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", last_name: "阿部", first_name: "", last_name_kana: "アベ", first_name_kana: "タロウ", birth_date: "19990101")
       user.valid?
-      expect(user.errors.full_messages).to include("First Name can't be blank")
+      expect(user.errors.full_messages).to include("First name can't be blank")
      end
      it "last_name_kanaが空では登録できない" do
       user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", last_name: "阿部", first_name: "太郎", last_name_kana: "", first_name_kana: "タロウ", birth_date: "19990101")
       user.valid?
-      expect(user.errors.full_messages).to include("Last Name Kana can't be blank")
+      expect(user.errors.full_messages).to include("Last name kana can't be blank")
      end
      it "first_name_kanaが空では登録できない" do
       user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", last_name: "阿部", first_name: "太郎", last_name_kana: "アベ", first_name_kana: "", birth_date: "19990101")
       user.valid?
-      expect(user.errors.full_messages).to include("First Name Kana can't be blank")
+      expect(user.errors.full_messages).to include("First name kana can't be blank")
      end
      it "birh_dateが空では登録できない" do
       user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", last_name: "阿部", first_name: "太郎", last_name_kana: "アベ", first_name_kana: "タロウ", birth_date: "")
       user.valid?
-      expect(user.errors.full_messages).to include("Birth Date can't be blank")
+      expect(user.errors.full_messages).to include("Birth date can't be blank")
      end
+     it 'password:半角英数混合(半角英語のみ)' do
+      user = User.new(nickname: "abe", email: "kkk@gmail.com", password: "aaaaaaa", password_confirmation: "00000000", last_name: "阿部", first_name: "太郎", last_name_kana: "アベ", first_name_kana: "タロウ", birth_date: "19990101")
+      user.valid?
+      expect(user.errors.full_messages).to include("Password Include both letters and numbers")
+    end
    end
  end
