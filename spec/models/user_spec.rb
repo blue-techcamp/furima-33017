@@ -29,8 +29,8 @@ require 'rails_helper'
     end
 
     it "passwordが5文字以下であれば登録できないこと" do
-      @user.password = "12345"
-      @user.password_confirmation = "12345"
+      @user.password = "a1234"
+      @user.password_confirmation = "a1234"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
