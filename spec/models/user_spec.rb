@@ -97,29 +97,33 @@ require 'rails_helper'
       expect(@user.errors.full_messages).to include("Last name Full-width characters")
     end
 
-    # it "first_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
-    #   # @user.first_name = ""
-    #   # @user.valid?
-    #   # expect(@user.errors.full_messages).to include("First name can't be blank")
+    it "first_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
+      @user.first_name = "[a-z]\d!_-@"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name Full-width characters")
+    end
+
+    it "last_name_kanaは全角カタカナ以外では登録できないこと" do
+      @user.last_name_kana = "[a-z]\d!_-@あ漢"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana Full-width katakana characters")
+    end
+
+    it "first_name_kanaは全角カタカナ以外では登録できないこと" do
+      @user.first_name_kana = "[a-z]\d!_-@あ漢"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
+    end
+
+    # it "passwordは英語のみでは登録できないこと" do
+
     # end
 
-    # it "last_name_kanaは全角カタカナ以外では登録できないこと"
+    # it "passwordは数字のみでは登録できないこと" do
 
     # end
 
-    # it "first_name_kanaは全角カタカナ以外では登録できないこと"
-
-    # end
-
-    # it "passwordは英語のみでは登録できないこと"
-
-    # end
-
-    # it "passwordは数字のみでは登録できないこと"
-
-    # end
-
-    # it "passwordは全角では登録できないこと"
+    # it "passwordは全角では登録できないこと" do
 
     # end
    end
