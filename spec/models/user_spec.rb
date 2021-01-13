@@ -84,5 +84,43 @@ require 'rails_helper'
       another_user.valid?
       expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
+
+    it "メールアドレスは@を含まないと登録できないこと" do
+      @user.email = "testexample"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+
+    # it "last_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
+    #   # @user.first_name = ""
+    #   # @user.valid?
+    #   # expect(@user.errors.full_messages).to include("First name can't be blank")
+    # end
+
+    # it "first_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
+    #   # @user.first_name = ""
+    #   # @user.valid?
+    #   # expect(@user.errors.full_messages).to include("First name can't be blank")
+    # end
+
+    # it "last_name_kanaは全角カタカナ以外では登録できないこと"
+
+    # end
+
+    # it "first_name_kanaは全角カタカナ以外では登録できないこと"
+
+    # end
+
+    # it "passwordは英語のみでは登録できないこと"
+
+    # end
+
+    # it "passwordは数字のみでは登録できないこと"
+
+    # end
+
+    # it "passwordは全角では登録できないこと"
+
+    # end
    end
  end
