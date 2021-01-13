@@ -77,5 +77,12 @@ require 'rails_helper'
       user.valid?
       expect(user.errors.full_messages).to include("Password Include both letters and numbers")
     end
+
+    it "重複したemailが存在する場合登録できないこと" do
+      @user.save
+      another_user = FactoryBot.build(:user, email: @user.email)
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
+    end
    end
  end
