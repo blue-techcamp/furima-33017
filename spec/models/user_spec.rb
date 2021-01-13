@@ -115,16 +115,22 @@ require 'rails_helper'
       expect(@user.errors.full_messages).to include("First name kana Full-width katakana characters")
     end
 
-    # it "passwordは英語のみでは登録できないこと" do
+    it "passwordは英語のみでは登録できないこと" do
+      @user.password = "aaaaaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Include both letters and numbers")
+    end
 
-    # end
+    it "passwordは数字のみでは登録できないこと" do
+      @user.password = "000000"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Include both letters and numbers")
+    end
 
-    # it "passwordは数字のみでは登録できないこと" do
-
-    # end
-
-    # it "passwordは全角では登録できないこと" do
-
-    # end
+    it "passwordは全角では登録できないこと" do
+      @user.password = "A１２３４５"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Include both letters and numbers")
+    end
    end
  end
