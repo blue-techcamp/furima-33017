@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    validates :nickname, :last_name, :first_name, :last_name_kana, :first_name_kana, :birth_date
+    validates :nickname, :password, :last_name, :first_name, :last_name_kana, :first_name_kana, :birth_date
   end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
