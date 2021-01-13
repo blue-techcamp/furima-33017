@@ -91,11 +91,11 @@ require 'rails_helper'
       expect(@user.errors.full_messages).to include("Email is invalid")
     end
 
-    # it "last_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
-    #   # @user.first_name = ""
-    #   # @user.valid?
-    #   # expect(@user.errors.full_messages).to include("First name can't be blank")
-    # end
+    it "last_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
+      @user.last_name = "[a-z]\d!_-@"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name Full-width characters")
+    end
 
     # it "first_nameは漢字・平仮名・カタカナ以外では登録できないこと" do
     #   # @user.first_name = ""
