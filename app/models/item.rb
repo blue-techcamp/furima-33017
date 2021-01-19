@@ -9,8 +9,6 @@ class Item < ApplicationRecord
   belongs_to :scheduled
   belongs_to :shipping_fee_status
   belongs_to :status
-  
-
 
   with_options presence: true do
     validates :image, :name, :info, :price
