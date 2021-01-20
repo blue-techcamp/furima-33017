@@ -6,9 +6,9 @@ class Item < ApplicationRecord
 
   belongs_to :category
   belongs_to :prefecture
-  belongs_to :scheduled
+  belongs_to :scheduled_delivery
   belongs_to :shipping_fee_status
-  belongs_to :status
+  belongs_to :sale_status
 
   with_options presence: true do
     validates :image, :name, :info, :price
