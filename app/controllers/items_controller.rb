@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show, :update]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, except: [:index, :new]
 
   def index
@@ -29,8 +29,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params)
     if @item.valid?
+      @item.update(item_params)
       redirect_to root_path
     else
       render :edit
