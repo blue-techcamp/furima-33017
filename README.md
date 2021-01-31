@@ -16,7 +16,7 @@
 ### Association
 
 * has_many :items
-* has_many :purchase_records
+* has_many :orders
 
 ## items table
 
@@ -35,25 +35,27 @@
 ### Association
 
 - belongs_to :user
-* has_one :purchase_record
+* has_one :order
 
 ## address table
 
 | Column          | Type       | Options           |
 |-----------------|------------|-------------------|
-| purchase_record | references | foreign_key: true |
+| order           | references | foreign_key: true |
 | postal_code     | string     | null: false       |
 | prefecture_id   | integer    | null: false       |
 | city            | string     | null: false       |
 | house_num       | string     | null: false       |
 | building_name   | string     | null: false       |
 | phone_num       | string     | null: false       |
+| order           | references | foreign_key: true |
 
 ### Association
 
-- belongs_to :purchase_record
+- belongs_to :order
+- belongs_to :order
 
-## purchase_record table
+## order table
 
 | Column | Type       | Options           |
 |--------|------------|-------------------|
