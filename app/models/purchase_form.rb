@@ -1,7 +1,6 @@
 class PurchaseForm
   include ActiveModel::Model
-  attr_accessor :order_id, :postal_code, :prefecture_id, :city, :prefecture, :house_num, :building_name, :phone_num, :user_id, :item_id, :token
-  validates :token, presence: true
+  attr_accessor :postal_code, :prefecture_id, :city, :prefecture, :house_num, :building_name, :phone_num, :user_id, :item_id, :token
 
   # 「電話番号」の郵便番号に関するバリデーション
   validates :phone_num, format: { with: /\A[a-z0-9]+\z/i, message: "is invalid. Input half-width characters." }
@@ -9,7 +8,7 @@ class PurchaseForm
   validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)" }
 
   with_options presence: true do
-    validates :postal_code, :city, :house_num, :phone_num
+    validates :postal_code, :city, :house_num, :phone_num, :token, :user_id, :item_id
   end
     
   #ジャンルの選択が「--」の時は保存できないようにする
