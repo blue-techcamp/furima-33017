@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
 
   def index
-    @item = Item.find(params[:item_id])
     if current_user.id = @item.user_id
       redirect_to root_path
     else
@@ -12,8 +12,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # 値をDBへ保存
-    @item = Item.find(params[:item_id])
     @purchase_form = PurchaseForm.new(purchase_form_params)
     if @purchase_form.valid?
       pay_item
@@ -37,5 +35,9 @@ class OrdersController < ApplicationController
       card: purchase_form_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 end
