@@ -1,13 +1,15 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+
 
   def index
-    #フォームオブジェクトのインスタンスを生成し、インスタンス変数に代入する
+    #フォームオブジェクトのインスタンスを生成し、インスタンス変数に代入
     @item = Item.find(params[:item_id])
     @purchase_form = PurchaseForm.new
   end
-  
+
   def create
-    # 値をDBへ保存する実装
+    # 値をDBへ保存
     @item = Item.find(params[:item_id])
     @purchase_form = PurchaseForm.new(purchase_form_params)
     if @purchase_form.valid?
@@ -28,9 +30,9 @@ class OrdersController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount:  @item.price,  # 商品の値段
-      card: purchase_form_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      amount:  @item.price,
+      card: purchase_form_params[:token],
+      currency: 'jpy'
     )
   end
 end
