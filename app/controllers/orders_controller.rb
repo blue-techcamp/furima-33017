@@ -11,12 +11,6 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     @purchase_form = PurchaseForm.new(purchase_form_params)
     if @purchase_form.valid?
-      # Payjp.api_key = "sk_test_100ca0870c099743aa59164f"
-      # Payjp::Charge.create(
-      #   amount: @item.price,  # 商品の値段
-      #   card: purchase_form_params[:token],    # カードトークン
-      #   currency: 'jpy'                 # 通貨の種類（日本円）
-      # )
       pay_item
       @purchase_form.save
       return redirect_to root_path
@@ -32,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_100ca0870c099743aa59164f"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount:  @item.price,  # 商品の値段
       card: purchase_form_params[:token],    # カードトークン
