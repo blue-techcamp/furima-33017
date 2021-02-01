@@ -1,11 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
 
-
   def index
-    #フォームオブジェクトのインスタンスを生成し、インスタンス変数に代入
     @item = Item.find(params[:item_id])
+    if current_user.id = @item.user_id
+      redirect_to root_path
+    else
+    #フォームオブジェクトのインスタンスを生成し、インスタンス変数に代入
     @purchase_form = PurchaseForm.new
+    end
   end
 
   def create
