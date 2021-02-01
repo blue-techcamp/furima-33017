@@ -24,10 +24,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
-    
-  end
-
   private
 
   def purchase_form_params
