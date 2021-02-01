@@ -1,6 +1,7 @@
 class PurchaseForm
   include ActiveModel::Model
   attr_accessor :order_id, :postal_code, :prefecture_id, :city, :prefecture, :house_num, :building_name, :phone_num, :user_id, :item_id, :token
+  validates :token, presence: true
 
   # 「電話番号」の郵便番号に関するバリデーション
   validates :phone_num, format: { with: /\A[a-z0-9]+\z/i, message: "is invalid. Input half-width characters." }
