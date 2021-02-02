@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_item
 
   def index
-    if current_user.id = @item.user_id
+    if current_user.id == @item.user_id && @item.order != nil
       redirect_to root_path
     else
     #フォームオブジェクトのインスタンスを生成し、インスタンス変数に代入
@@ -38,6 +38,6 @@ class OrdersController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 end
