@@ -10,7 +10,9 @@
       <%= image_tag @item.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <div class='sold-out'>
+      <% if @item.order != nil %>
         <span>Sold Out!!</span>
+      <% end %>
       </div>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
@@ -24,7 +26,7 @@
     </div>
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、条件分岐 %>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && @item.order == nil %>
       <% if current_user.id == @item.user.id %>
         <%#  商品編集削除ボタン %>
     <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
