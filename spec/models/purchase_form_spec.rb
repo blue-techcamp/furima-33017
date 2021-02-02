@@ -51,9 +51,9 @@ RSpec.describe PurchaseForm, type: :model do
     end
 
     it "postal_codeはハイフンがないと購入できないこと" do
-      @purchase_form.postal_code = ""
+      @purchase_form.postal_code = "1234567"
       @purchase_form.valid?
-      expect(@purchase_form.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)", "Postal code can't be blank")
+      expect(@purchase_form.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
     end
 
     it "phone_numはハイフン不要で11桁以内でないと購入できないこと" do
