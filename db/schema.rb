@@ -35,12 +35,12 @@ ActiveRecord::Schema.define(version: 2021_01_26_094533) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
-    t.string "postal_code"
-    t.integer "prefecture_id"
-    t.string "city"
-    t.string "house_num"
-    t.string "building_name"
-    t.string "phone_num"
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "house_num", null: false
+    t.string "building_name", null: false
+    t.string "phone_num", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["order_id"], name: "index_addresses_on_order_id"
@@ -89,5 +89,6 @@ ActiveRecord::Schema.define(version: 2021_01_26_094533) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "addresses", "orders"
   add_foreign_key "items", "users"
 end
