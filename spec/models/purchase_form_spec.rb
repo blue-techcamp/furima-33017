@@ -12,6 +12,11 @@ RSpec.describe PurchaseForm, type: :model do
      it "全ての値が正常であれば購入できること" do
        expect(@purchase_form).to be_valid
      end
+
+     it "建物名が空でも購入できること" do
+      @purchase_form.building_name = ""
+      expect(@purchase_form).to be_valid
+    end
    end
 
    context '購入がうまくいかないとき' do
