@@ -3,7 +3,9 @@ RSpec.describe PurchaseForm, type: :model do
   describe "購入" do
 
    before do
-     @purchase_form = FactoryBot.build(:purchase_form)
+    @item = FactoryBot.create(:item)
+    @user = FactoryBot.create(:user)
+    @purchase_form = FactoryBot.build(:purchase_form, item_id: @item.id, user_id: @user.id)
    end
 
    context '購入がうまくいくとき' do
@@ -59,6 +61,18 @@ RSpec.describe PurchaseForm, type: :model do
       @purchase_form.token = nil
       @purchase_form.valid?
       expect(@purchase_form.errors.full_messages).to include("Token can't be blank")
+    end
+
+    it "user_idが空では購入できないこと" do
+      @purchase_form.user_id = ""
+      @purchase_form.valid?
+      expect(@purchase_form.errors.full_messages).to include("User can't be blank")
+    end
+
+    it "item_idが空では購入できないこと" do
+      @purchase_form.item_id = ""
+      @purchase_form.valid?
+      expect(@purchase_form.errors.full_messages).to include("Item can't be blank")
     end
    end
   end
